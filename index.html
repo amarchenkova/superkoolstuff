@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUPER KOOL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Work Sans', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(
+                to bottom,
+                #4CAF50,
+                #2196F3,
+                #673AB7
+            );
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            position: relative;
+        }
+
+        .video-container {
+            width: 300px;
+            height: 300px;
+            margin: 2rem auto;
+            position: relative;
+        }
+
+        .tagline {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 0.3em;
+            white-space: nowrap;
+            z-index: 2;
+        }
+
+        .footer {
+            margin-top: 2rem;
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        .footer strong {
+            font-weight: 700;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .audio-control {
+            margin-top: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            width: 24px;
+            height: 24px;
+            margin: 1.5rem auto 0;
+        }
+
+        .audio-control:hover {
+            transform: scale(1.1);
+        }
+
+        .audio-control svg {
+            width: 100%;
+            height: 100%;
+            fill: white;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .audio-control:hover svg {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .tagline {
+                font-size: 1.8rem;
+            }
+            .video-container {
+                width: 200px;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Audio Background -->
+    <audio loop>
+        <source src="placeholder-background-music.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        <div class="video-container">
+            <!-- Placeholder video element -->
+            <video autoplay loop muted playsinline>
+                <source src="ice-cream-animation.mp4" type="video/mp4">
+            </video>
+            <div class="tagline">WINTER IS COMING</div>
+        </div>
+        <div class="footer"><strong>SUPER KOOL</strong> Stuff</div>
+        <div class="audio-control">
+            <!-- SVG for muted state -->
+            <svg viewBox="0 0 24 24" class="muted">
+                <path d="M11 5L6 9H2v6h4l5 4V5zM15.54 8.46c1.96 1.96 1.96 5.12 0 7.08l-1.42-1.42c1.17-1.17 1.17-3.07 0-4.24l1.42-1.42z"/>
+            </svg>
+            <!-- SVG for unmuted state (initially hidden) -->
+            <svg viewBox="0 0 24 24" class="unmuted" style="display: none;">
+                <path d="M11 5L6 9H2v6h4l5 4V5zm6.93 3.46c1.96 1.96 1.96 5.12 0 7.08l-1.42-1.42c1.17-1.17 1.17-3.07 0-4.24l1.42-1.42zM14.5 12c0-1.38 1.12-2.5 2.5-2.5s2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5-2.5-1.12-2.5-2.5z"/>
+            </svg>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const audio = document.querySelector('audio');
+            const audioControl = document.querySelector('.audio-control');
+            const mutedIcon = document.querySelector('.muted');
+            const unmutedIcon = document.querySelector('.unmuted');
+            let isPlaying = false;
+
+            audioControl.addEventListener('click', function() {
+                if (isPlaying) {
+                    audio.pause();
+                    mutedIcon.style.display = 'block';
+                    unmutedIcon.style.display = 'none';
+                } else {
+                    audio.play();
+                    mutedIcon.style.display = 'none';
+                    unmutedIcon.style.display = 'block';
+                }
+                isPlaying = !isPlaying;
+            });
+        });
+    </script>
+</body>
+</html>
