@@ -140,7 +140,7 @@
 </head>
 <body>
     <!-- Audio Background -->
-    <audio loop>
+    <audio loop preload="auto" playsinline>
         <source src="QCsounds.mp3" type="audio/mpeg">
     </audio>
 
@@ -169,25 +169,47 @@
             const mutedIcon = document.querySelector('.muted');
             const unmutedIcon = document.querySelector('.unmuted');
             let isPlaying = false;
-
-            // Set audio to loop
-            audio.loop = true;
-
-            audioControl.addEventListener('click', function() {
+        
+            // Set audio to load but not play automatically
+            audio.preload = 'auto';
+            audio.load();
+        
+            // Add touch event for mobile
+            audioControl.addEventListener('touchstart', function(e) {
+                e.preventDefault(); // Prevent default touch behavior
+            });
+        
+            // Combine click and touch events
+            audioControl.addEventListener('click', handleAudio);
+            audioControl.addEventListener('touchend', handleAudio);
+        
+            function handleAudio(e) {
+                e.preventDefault(); // Prevent any default behavior
+                
                 if (isPlaying) {
                     audio.pause();
                     mutedIcon.style.display = 'block';
                     unmutedIcon.style.display = 'none';
                 } else {
-                    audio.play().catch(function(error) {
-                        console.log("Audio play failed:", error);
-                    });
-                    mutedIcon.style.display = 'none';
-                    unmutedIcon.style.display = 'block';
+                    // Create and resolve a promise for mobile browsers
+                    const playPromise = audio.play();
+                    
+                    if (playPromise !== undefined) {
+                        playPromise.then(_ => {
+                            // Playback started successfully
+                            mutedIcon.style.display = 'none';
+                            unmutedIcon.style.display = 'block';
+                        })
+                        .catch(error => {
+                            // Auto-play was prevented
+                            console.log("Audio play failed:", error);
+                            // Optionally show a "tap to enable sound" message here
+                        });
+                    }
                 }
                 isPlaying = !isPlaying;
-            });
-
+            }
+        
             // Handle audio ending
             audio.addEventListener('ended', function() {
                 if (isPlaying) {
