@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SUPER KOOL</title>
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@200;300;500;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -21,9 +21,10 @@
             align-items: center;
             background: linear-gradient(
                 to bottom,
-                #4CAF50,
-                #2196F3,
-                #673AB7
+                #4CAF50 10%,
+                #2196F3 30%,
+                #673AB7 50%,  /* Lighter purple, starts earlier */
+                #0a0720 90%   /* Dark purple-black pushed lower */
             );
             color: white;
             text-align: center;
@@ -48,8 +49,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 2.5rem;
-            font-weight: 300;
+            font-size: 5rem;  /* Doubled from 2.5rem to 5rem */
+            font-weight: 200;
             letter-spacing: 0.3em;
             white-space: nowrap;
             z-index: 2;
@@ -63,6 +64,10 @@
 
         .footer strong {
             font-weight: 700;
+        }
+
+        .footer span {
+            font-weight: 200;
         }
 
         video {
@@ -98,7 +103,7 @@
 
         @media (max-width: 768px) {
             .tagline {
-                font-size: 1.8rem;
+                font-size: 3.6rem;  /* Adjusted for mobile */
             }
             .video-container {
                 width: 200px;
@@ -110,7 +115,7 @@
 <body>
     <!-- Audio Background -->
     <audio loop>
-        <source src="QCsounds.mp3" type="audio/mpeg">
+        <source src="QCSounds.mp3" type="audio/mpeg">
     </audio>
 
     <div class="container">
@@ -121,7 +126,7 @@
             </video>
             <div class="tagline">WINTER IS COMING</div>
         </div>
-        <div class="footer"><strong>SUPER KOOL</strong> Stuff</div>
+        <div class="footer"><strong>SUPER KOOL</strong> <span>Stuff</span></div>
         <div class="audio-control">
             <!-- SVG for muted state (with X) -->
             <svg viewBox="0 0 24 24" class="muted">
